@@ -140,7 +140,21 @@ describe('Basic user flow for Website', () => {
     // TODO - Step 7
     // Reload the page once more, then go through each <product-item> to make sure that it has remembered nothing
     // is in the cart - do this by checking the text on the buttons so that they should say "Add to Cart".
+    await page.reload();
+    const prodItems = await page.$$('product-item');
+    for (let i = 0; i < prodItems.length; i++) {
+      const prodItem = prodItems[i];
+      const shadowRoot = await prodItem.getProperty('shadowRoot');
+      const cartButton = await shadowRoot.$('button');
+      const buttonInnerText = await cartButton.getProperty('innerText');
+      const buttonInnerTextJson = await buttonInnerText.jsonValue();
+      expect(buttonInnerTextJson).toBe('Add to Cart');
+    }
     // Also check to make sure that #cart-count is still 0
+    const cartCount = await page.$('#cart-count');
+    const cartCountInnerText = await cartCount.getProperty('innerText');
+    const cartCountInnerTextJson = await cartCountInnerText.jsonValue();
+    expect(cartCountInnerTextJson).toBe("0");
   }, 10000);
 
   // Checking to make sure that localStorage for the cart is as we'd expect for the
