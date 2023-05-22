@@ -15,3 +15,14 @@ Nicholas Yousefi (I did not work with a partner)
 **Answer:** No.
 
 **Explanation:** End-to-end testing emulates user actions from start to finish as they interact with your website. Most user actions do not involve checking if functions return the correct output.
+### Question 3:
+
+**Answer:** No.
+
+**Explanation:** The "message" feature probably calls multiple functions. Unit tests are used to test individual parts of your code, such as just one function. They are not used to test multiple parts of your code working together like E2E test do.
+
+### Question 4:
+
+**Answer:** Yes.
+
+**Explanation:** The "max message length" feature of a messaging app is probably handled by only a small part of your code. Therefore, it would be appropriate to test it using a unit test.
