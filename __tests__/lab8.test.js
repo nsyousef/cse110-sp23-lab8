@@ -120,7 +120,17 @@ describe('Basic user flow for Website', () => {
     console.log('Checking number of items in cart on screen...');
     // TODO - Step 6
     // Go through and click "Remove from Cart" on every single <product-item>, just like above.
+    const prodItems = await page.$$('product-item');
+    for (let i = 0; i < prodItems.length; i++) {
+      const shadowRoot = await prodItems[i].getProperty('shadowRoot');
+      const cartButton = await shadowRoot.$('button');
+      await cartButton.click();
+    }
     // Once you have, check to make sure that #cart-count is now 0
+    const cartCount = await page.$('#cart-count');
+    const cartCountInnerText = await cartCount.getProperty('innerText');
+    const cartCountInnerTextJson = await cartCountInnerText.jsonValue();
+    expect(cartCountInnerTextJson).toBe("0");
   }, 10000);
 
   // Checking to make sure that it remembers us removing everything from the cart
