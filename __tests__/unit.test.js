@@ -19,7 +19,7 @@ test('(ABC) DEF-GHIJ is not a valid phone number', () => {
 });
 
 test('ABC DEF-GHIJ is not a valid phone number', () => {
-  expect(functions.isPhoneNumber('123')).toBeFalsy();
+  expect(functions.isPhoneNumber('ABC DEF-GHIJ')).toBeFalsy();
 });
 
 // tests for isEmail
@@ -28,8 +28,8 @@ test('johndoe@example.com is a valid email', () => {
   expect(functions.isEmail('johndoe@example.com')).toBeTruthy();
 });
 
-test('iLikePie@mariecallenders.com is a valid email', () => {
-  expect(functions.isEmail('iLikePie@mariecallenders.com')).toBeTruthy();
+test('iLikePie@mariecallenders.org is a valid email', () => {
+  expect(functions.isEmail('iLikePie@mariecallenders.org')).toBeTruthy();
 });
 
 test('gmail.com@john.doe is not a valid email', () => {
